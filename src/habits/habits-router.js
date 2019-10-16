@@ -1,24 +1,18 @@
 const express = require('express');
 const HabitsService = require('./habits-service');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const habitsRouter = express.Router();
 
 habitsRouter
-  .route('/:user_id')
-  .all((req, res, next) => {
-    HabitsService.getHabitsByUserId(req.app.get('db'), req.params.user_id)
-      .then((user) => {
-        if (!user) {
-          return res.status(404).json({
-            error: { message: 'User does not exist' },
-          });
-        }
-        res.user = user;
-        next();
-      });
-  })
-  .get((req, res) => {
-    return res.json(res.user);
+  .route('/')
+  .all(requireAuth)
+  .get((req, res, next) => {
+    HabitsService.getHabits(req.app.get('db'),req.user.id)
+      .then(habits => {
+        res.json(habits.map(HabitsService.serializeHabit));
+      })
+      .catch(next);
   });
 
 module.exports = habitsRouter;
