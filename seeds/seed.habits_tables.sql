@@ -2,7 +2,8 @@ BEGIN;
 
 TRUNCATE
   habits,
-  habits_users
+  habits_users,
+  habit_dates
   RESTART IDENTITY CASCADE;
 
 INSERT INTO habits_users (user_name, password)
@@ -14,14 +15,24 @@ VALUES
   ('lexlor',  '$2a$12$CJe0O.Vnir27B6k.3ySdtelXQYfIj9Gt6C0inAgm/aXva19cT.3/O'),
   ('wippy', '$2a$12$fCzfLUy9C4XM8oLxcn/u8um/C6JhW4rVQOnfAVfiEuDOL1eVfwTT2');
 
-INSERT INTO habits(habit_title,percentage,user_id)
+INSERT INTO habits(habit_title,user_id)
 VALUES
-('Walk 10K steps' , '75',1),
-('Read Daily' , '100',1),
-('Drink 64Oz water' , '50',3),
-('Meditate' , '0',5),
-('Exercises' , '50',2),
-('Learn French' , '30',4),
-('Walk 10K steps' , '75',6);
+('Walk 10K steps' ,1),
+('Read Daily' , 1),
+('Drink 64Oz water',3),
+('Meditate' ,5),
+('Exercises' ,2),
+('Learn French',4),
+('Walk 10K steps' ,6);
+
+INSERT INTO habit_dates(percentage,habit_id,date_added)
+VALUES
+(100,1),
+(75,1, ' 2017-08-15 21:05:15.723336+07'),
+(35,2, '2019-15-28'),
+(55,3,'2019-15-22'),
+(45,4,'2019-14-22'),
+(80,1, '2019-15-22'),
+(90,1, ' 2019-15-15 21:05:00');
 
 COMMIT;
