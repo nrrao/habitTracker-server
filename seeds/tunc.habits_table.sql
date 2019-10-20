@@ -1,4 +1,5 @@
 TRUNCATE
   habits,
-  habits_users
+  habits_users,
+  habit_dates
   RESTART IDENTITY CASCADE;

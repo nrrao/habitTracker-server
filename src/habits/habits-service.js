@@ -2,29 +2,38 @@ const moment = require('moment');
 
 const HabitsService = {
   getAllDatesForHabit(db,habitId){
+    const past = moment().subtract(4,'days').format('YYYY-MM-DD')
     return db
     .from('habit_dates')
     .select('*')
     .where('habit_dates.habit_id',habitId)
+    .whereBetween('date_added',[past,'now()'])
+    .orderBy('date_added','desc')
   },
 
   addHabitDate(db, newHabitId){
-    let newHabitDate = {
-      'percentage': 0,
-      'date_added': 'now()',
-      'habit_id': newHabitId
-    };
-    return db
-      .insert(newHabitDate)
-      .into('habit_dates')
-      .returning('*')      
+    //create array of dates
+    const dates = [
+      moment(),
+      moment().subtract(1,'days'),
+      moment().subtract(2,'days'),
+      moment().subtract(3,'days'),
+      moment().subtract(4,'days'),
+    ]
+
+    const datesToInsert = dates.map(date=>
+      ({'percentage': 0, 'date_added':date, 'habit_id':newHabitId}))
+    
+    return db('habit_dates').insert(datesToInsert).returning('*')
   },
 
-  getHabits(db, id) {
+  getHabits(db, userId) {
+    
     return db
       .from('habits')
       .select('*')
-      .where('habits.user_id', id)
+      .where('habits.user_id', userId)
+      .orderBy('habit_id')
       .then(habits=>{
         return Promise.all(habits.map(habit=>{
          return HabitsService.getAllDatesForHabit(db,habit.habit_id)
@@ -44,6 +53,28 @@ const HabitsService = {
       .then(newHabitObjArr=>HabitsService.addHabitDate(db,newHabitObjArr[0].habit_id))
       .then(()=>HabitsService.getHabits(db, newHabit.user_id));
   },
+
+  updateHabitTitle(db,newHabitTitle,userId) {
+       return db('habits')
+      .where({habit_id:newHabitTitle.habit_id})
+      .update({habit_title:newHabitTitle.habit_title})
+      .then(()=>HabitsService.getHabits(db, userId));
+  },
+
+  deleteHabit(db, id) {
+    return db('habits')
+      .where({ habit_id:id })
+      .del()
+  },
+
+  deleteHabitDate(db, habitId,userId) {
+    return db('habit_dates')
+      .where({habit_id:habitId})
+      .del()
+      .then(()=>HabitsService.deleteHabit(db,habitId))
+      .then(()=>HabitsService.getHabits(db, userId));
+  },
+
   serializeHabit(habit) {
     return {
       

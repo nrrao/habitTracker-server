@@ -1,15 +1,22 @@
 const DatesService = {
 
-  getHabitDates(db, userId) {
-    return db
-    //SELECT * FROM habit_dates HD JOIN habits H ON HD.habit_id = H.habit_id WHERE H.user_id=1
-      .from('habit_dates AS HD')
-      .select('H.habit_title','H.habit_id','HD.date_id','HD.percentage','HD.date_added')  
-      .join('habits AS H', 'HD.habit_id', '=', 'H.habit_id')
-      .where('H.user_id','=', userId)
-      .orderBy('HD.date_added','desc');
+  // getHabitDates(db, userId) {
+  //   return db
+  //   //SELECT * FROM habit_dates HD JOIN habits H ON HD.habit_id = H.habit_id WHERE H.user_id=1
+  //     .from('habit_dates AS HD')
+  //     .select('H.habit_title','H.habit_id','HD.date_id','HD.percentage','HD.date_added')  
+  //     .join('habits AS H', 'HD.habit_id', '=', 'H.habit_id')
+  //     .where('H.user_id','=', userId)
+  //     .orderBy('HD.date_added','desc');
       
-  },
+  // },
+
+  getAllHabitsByDates(db,habitId){
+    return db
+    .from('habit_dates')
+    .select('*')
+    .where('habit_dates.habit_id', id)
+  }
 
   // addHabit(db, newHabit) {
   //   return db
