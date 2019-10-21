@@ -39,17 +39,18 @@ habitsRouter
   })
 
   .patch(requireAuth,jsonBodyParser, (req, res, next) => {
-    
-    const {habit_title,user_id,habit_id}=req.body;
-    const habitTitleToUpdate = {habit_title,user_id,habit_id};
-    const numberOfValues = Object.values(habitTitleToUpdate).filter(Boolean).length;
+    console.log(req.body);
+    const {habit_id,habit_title,dates}=req.body;
+    const habitToUpdate= {habit_id,habit_title,dates};
+    console.log(habitToUpdate);
+    const numberOfValues = Object.values(req.body).filter(Boolean).length;
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
           message: 'Request body must content either \'title\', \'style\' or \'content\''
         }
       });
-    HabitsService.updateHabitTitle(req.app.get('db'),habitTitleToUpdate,req.user.id)
+    HabitsService.updateHabit(req.app.get('db'),habitToUpdate.habit_id,habitToUpdate.habit_title,habitToUpdate.dates,req.user.id)
       .then(habitsAfterUpdate=>{
         res.status(201)
           

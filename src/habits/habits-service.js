@@ -54,11 +54,23 @@ const HabitsService = {
       .then(()=>HabitsService.getHabits(db, newHabit.user_id));
   },
 
-  updateHabitTitle(db,newHabitTitle,userId) {
-       return db('habits')
-      .where({habit_id:newHabitTitle.habit_id})
-      .update({habit_title:newHabitTitle.habit_title})
-      .then(()=>HabitsService.getHabits(db, userId));
+  async updateHabitDates(db,dates){
+    dates.forEach(async (date) => {
+      await db('habit_dates')
+      .where({date_id:date.date_id})
+      .update({percentage:date.percentage})
+      .then()
+    });
+  },
+  async updateHabit(db,habit_id,habit_title,dates,userId) {
+      await db('habits')
+      .where({habit_id:habit_id})
+      .update({habit_title:habit_title})
+      .then();
+
+      await this.updateHabitDates(db, dates);
+      
+      return HabitsService.getHabits(db, userId);
   },
 
   deleteHabit(db, id) {
