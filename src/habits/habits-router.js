@@ -50,13 +50,27 @@ habitsRouter
           message: 'Request body must content either \'title\', \'style\' or \'content\''
         }
       });
-    HabitsService.updateHabit(req.app.get('db'),habitToUpdate.habit_id,habitToUpdate.habit_title,habitToUpdate.dates,req.user.id)
-      .then(habitsAfterUpdate=>{
-        res.status(201)
+    const datesToAdd = habitToUpdate.dates.filter(date =>{return date.date_id === -1;});
+    console.log(datesToAdd);
+    if(datesToAdd.length !== 0){
+      HabitsService.addDateId(req.app.get('db'),habitToUpdate.habit_id,datesToAdd,habitToUpdate.habit_title,req.user.id)
+        .then(habitsAfterUpdate=>{
+          res.status(201)
           
-          .json(habitsAfterUpdate);
-      })
-      .catch(next);
+            .json(habitsAfterUpdate);
+        })
+        .catch(next);
+    }
+    else{
+      HabitsService.updateHabit(req.app.get('db'),habitToUpdate.habit_id,habitToUpdate.habit_title,habitToUpdate.dates,req.user.id)
+        .then(habitsAfterUpdate=>{
+          res.status(201)
+          
+            .json(habitsAfterUpdate);
+        })
+        .catch(next);
+    }
+    
   });
 habitsRouter
   .route('/:habitId')
@@ -70,8 +84,8 @@ habitsRouter
         res.status(201)
           .json(habitsAfterDelete);
       })
-      .catch(next)
-  })
+      .catch(next);
+  });
 
 
 module.exports = habitsRouter;

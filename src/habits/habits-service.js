@@ -73,18 +73,37 @@ const HabitsService = {
       return HabitsService.getHabits(db, userId);
   },
 
+  updateHabitTitle(db,habit_id,habit_title) {
+    console.log('$$$$$$',habit_id)
+    return db('habits')
+    .where({habit_id:habit_id})
+    .update({habit_title:habit_title})
+    .then()
+  },
+
+  async addDateId(db,habitId,dates,habit_title,userId){
+    console.log('************',dates)
+    dates.map(date=>{
+      return db('habit_dates')
+      .insert({percentage:date.percentage,date_added:date.date_added,habit_id:habitId})
+      .then()
+    }) 
+    await HabitsService.updateHabitTitle(db,habitId,habit_title)
+    return HabitsService.getHabits(db,userId)
+  },
+
   deleteHabit(db, id) {
     return db('habits')
       .where({ habit_id:id })
       .del()
   },
 
-  deleteHabitDate(db, habitId,userId) {
-    return db('habit_dates')
+  async deleteHabitDate(db, habitId,userId) {
+    await db('habit_dates')
       .where({habit_id:habitId})
       .del()
-      .then(()=>HabitsService.deleteHabit(db,habitId))
-      .then(()=>HabitsService.getHabits(db, userId));
+      await HabitsService.deleteHabit(db,habitId)
+      return HabitsService.getHabits(db, userId);
   },
 
   serializeHabit(habit) {
