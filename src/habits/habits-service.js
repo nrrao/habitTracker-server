@@ -12,6 +12,7 @@ const HabitsService = {
   },
 
   addHabitDate(db, newHabitId){
+    console.log('$$$$$$$$')
     //create array of dates
     const dates = [
       moment(),
@@ -28,16 +29,17 @@ const HabitsService = {
   },
 
   getHabits(db, userId) {
-    
+ 
     return db
       .from('habits')
       .select('*')
       .where('habits.user_id', userId)
-      .orderBy('habit_id')
+      .orderBy('habit_id','desc')
       .then(habits=>{
         return Promise.all(habits.map(habit=>{
-         return HabitsService.getAllDatesForHabit(db,habit.habit_id)
+          return HabitsService.getAllDatesForHabit(db,habit.habit_id)
          .then(dates=>{
+           
            return{...habit,dates}
          })
 
@@ -46,6 +48,7 @@ const HabitsService = {
   },
 
   addHabit(db, newHabit) {
+    console.log('*****',newHabit)
     return db
       .insert(newHabit)
       .into('habits')
@@ -74,7 +77,7 @@ const HabitsService = {
   },
 
   updateHabitTitle(db,habit_id,habit_title) {
-    console.log('$$$$$$',habit_id)
+    
     return db('habits')
     .where({habit_id:habit_id})
     .update({habit_title:habit_title})
@@ -82,7 +85,7 @@ const HabitsService = {
   },
 
   async addDateId(db,habitId,dates,habit_title,userId){
-    console.log('************',dates)
+    
     dates.map(date=>{
       return db('habit_dates')
       .insert({percentage:date.percentage,date_added:date.date_added,habit_id:habitId})
@@ -106,16 +109,6 @@ const HabitsService = {
       return HabitsService.getHabits(db, userId);
   },
 
-  serializeHabit(habit) {
-    return {
-      
-      title: habit.habit_title,
-      percentage:habit.dates.map(percentage=>percentage.percentage),
-      habitId:habit.habit_id,
-      date:habit.dates.map(date=>date.date_added)
-      
-    };
-  },
 
   
 };

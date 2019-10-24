@@ -55,7 +55,7 @@ habitsRouter
     if(datesToAdd.length !== 0){
       HabitsService.addDateId(req.app.get('db'),habitToUpdate.habit_id,datesToAdd,habitToUpdate.habit_title,req.user.id)
         .then(habitsAfterUpdate=>{
-          res.status(201)
+          res.status(204)
           
             .json(habitsAfterUpdate);
         })
@@ -64,7 +64,7 @@ habitsRouter
     else{
       HabitsService.updateHabit(req.app.get('db'),habitToUpdate.habit_id,habitToUpdate.habit_title,habitToUpdate.dates,req.user.id)
         .then(habitsAfterUpdate=>{
-          res.status(201)
+          res.status(204)
           
             .json(habitsAfterUpdate);
         })
@@ -81,7 +81,7 @@ habitsRouter
       req.params.habitId,req.user.id
     )
       .then(habitsAfterDelete => {
-        res.status(201)
+        res.status(204)
           .json(habitsAfterDelete);
       })
       .catch(next);
