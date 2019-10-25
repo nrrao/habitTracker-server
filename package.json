@@ -13,6 +13,8 @@
     "deploy": "git push heroku master"
   },
   "keywords": [],
+  "engines":{
+    "node":"v12.8.0"},
   "author": "",
   "license": "ISC",
   "dependencies": {
