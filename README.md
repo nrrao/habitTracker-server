@@ -1,6 +1,17 @@
-# HabitTracker - Server
+# HabitTracker - Client
 
-See this app live at:
+See this app live at: https://nandana-habittracker-app.now.sh<br/>
+Try this app<br/>
+Demo username: newuser<br/>
+Demo password: Newuser1!<br/>
+client Repo https://github.com/nrrao/habitTracker-client<br/>
+API Repo https://github.com/nrrao/habitTracker-server<br/>
+
+### Why HabitTracker?
+"What gets measured gets managed".<br/>
+Build positvie habits or easily break bad habits by keeping track.<br/>
+HabitTracker allows you to keep track of your habits every day and helps you achieve your goals.<br/>
+
 
 ## API EndPoints
 
