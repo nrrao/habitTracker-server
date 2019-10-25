@@ -12,7 +12,7 @@ const HabitsService = {
   },
 
   addHabitDate(db, newHabitId){
-    console.log('$$$$$$$$')
+    
     //create array of dates
     const dates = [
       moment(),
@@ -48,7 +48,7 @@ const HabitsService = {
   },
 
   addHabit(db, newHabit) {
-    console.log('*****',newHabit)
+    
     return db
       .insert(newHabit)
       .into('habits')

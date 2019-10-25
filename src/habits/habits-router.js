@@ -39,10 +39,10 @@ habitsRouter
   })
 
   .patch(requireAuth,jsonBodyParser, (req, res, next) => {
-    console.log(req.body);
+    
     const {habit_id,habit_title,dates}=req.body;
     const habitToUpdate= {habit_id,habit_title,dates};
-    console.log(habitToUpdate);
+   
     const numberOfValues = Object.values(req.body).filter(Boolean).length;
     if (numberOfValues === 0)
       return res.status(400).json({
@@ -51,7 +51,7 @@ habitsRouter
         }
       });
     const datesToAdd = habitToUpdate.dates.filter(date =>{return date.date_id === -1;});
-    console.log(datesToAdd);
+    
     if(datesToAdd.length !== 0){
       HabitsService.addDateId(req.app.get('db'),habitToUpdate.habit_id,datesToAdd,habitToUpdate.habit_title,req.user.id)
         .then(habitsAfterUpdate=>{
