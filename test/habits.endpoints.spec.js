@@ -114,7 +114,7 @@ describe('Habits Endpoints', function() {
               });
           })
       );
-      it('responds with 204 and removes the habit', () => {
+      it('responds with 201 and removes the habit', () => {
         const userId=testUsers[0].id;
         const expectedHabitList=helpers.makeExpectedHabitlist(userId,testHabits,testDates);
         const idToRemove = 5;
@@ -122,7 +122,7 @@ describe('Habits Endpoints', function() {
         return supertest(app)
           .delete(`/api/habits/${idToRemove}`)
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-          .expect(204)
+          .expect(201)
           .then(res =>
             supertest(app)
               .get('/api/habits')
@@ -148,7 +148,7 @@ describe('Habits Endpoints', function() {
               });
           })
       );
-      it('responds with 204 and updates the article', () => {
+      it('responds with 201 and updates the article', () => {
         const userId=testUsers[0].id;
         const expectedHabitList=helpers.makeExpectedHabitlist(userId,testHabits,testDates);
         const updateHabit = {
@@ -166,7 +166,7 @@ describe('Habits Endpoints', function() {
           .patch('/api/habits')
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .send(updateHabit)
-          .expect(204)
+          .expect(201)
           .then(res =>
             supertest(app)
               .get(`/api/habits`)
