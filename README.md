@@ -1,26 +1,37 @@
-# Express Boilerplate!
+# HabitTracker - Server
 
-This is a boilerplate project used for starting new projects!
+See this app live at:
 
-## Set up
+## API EndPoints
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+POST/api/auth/login -Login to the system 
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+POST/api/users - SignUp New Users.
 
-## Scripts
+GET/api.habits - Get all the habits of particular user
 
-Start the application `npm start`
+POST/api/habits - Add new habit.
 
-Start nodemon for the application `npm run dev`
+PATCH/api/habits - Update the habit title and percentage any habit.
 
-Run the tests `npm test`
+DELETE/api/habits/:habitId - Delete the habit.
 
-## Deploying
+## 
+"What gets measured gets managed"
+Build positvie habits or easily break bad habits by keeping track.
+HabitTracker allows you to keep track of your habits every day and helps you achieve your goals.
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+### Technologies Used
+
+#### Back-End * Node.js * Express.js * PostgreSQL
+
+### Usage
+
+* Users register to the application with a unique username and password 
+* Users can add Habits and enter the percentage of completion everyday.
+* Users can see and edit the habits upto 5 days. 
+* Users have a visual reference of their goal and motivates them to be consistent. 
+
+## Sneak Peak of HabitTracker
+
+### Landing
