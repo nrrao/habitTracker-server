@@ -28,7 +28,7 @@ app.use('/api/users', usersRouter)
 
 
 app.get('/', (req, res) => {
-  res.send('Hello, world!');
+  res.send('Hello From HabitTracker Server');
 });
 
 app.use(errorHandler);
