@@ -3,11 +3,12 @@ var moment = require('moment-timezone');
 const HabitsService = {
   getAllDatesForHabit(db,habitId){
     const past = moment.tz('America/New_York').subtract(4,'days').format('YYYY-MM-DD')
+    const now =  moment.tz('America/New_York')
     return db
     .from('habit_dates')
     .select('*')
     .where('habit_dates.habit_id',habitId)
-    .whereBetween('date_added',[past,'now()'])
+    .whereBetween('date_added',[past,now])
     .orderBy('date_added','desc')
   },
 
