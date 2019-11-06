@@ -14,12 +14,20 @@ const HabitsService = {
   addHabitDate(db, newHabitId){
     
     //create array of dates
+    // const dates = [
+    //   moment().tz('America/New_York'),
+    //   moment().tz('America/New_York').subtract(1,'days'),
+    //   moment().tz('America/New_York').subtract(2,'days'),
+    //   moment().tz('America/New_York').subtract(3,'days'),
+    //   moment().tz('America/New_York').subtract(4,'days'),
+    // ]
+
     const dates = [
-      moment().tz('America/New_York'),
-      moment().tz('America/New_York').subtract(1,'days'),
-      moment().tz('America/New_York').subtract(2,'days'),
-      moment().tz('America/New_York').subtract(3,'days'),
-      moment().tz('America/New_York').subtract(4,'days'),
+      moment(),
+      moment().subtract(1,'days'),
+      moment().subtract(2,'days'),
+      moment().subtract(3,'days'),
+      moment().subtract(4,'days'),
     ]
 
     const datesToInsert = dates.map(date=>
