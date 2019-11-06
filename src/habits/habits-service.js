@@ -2,7 +2,7 @@ var moment = require('moment-timezone');
 
 const HabitsService = {
   getAllDatesForHabit(db,habitId){
-    const past = moment().subtract(4,'days').format('YYYY-MM-DD')
+    const past = moment.tz('America/New_York').subtract(4,'days').format('YYYY-MM-DD')
     return db
     .from('habit_dates')
     .select('*')
