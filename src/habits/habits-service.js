@@ -1,4 +1,4 @@
-const moment = require('moment');
+var moment = require('moment-timezone');
 
 const HabitsService = {
   getAllDatesForHabit(db,habitId){
@@ -17,11 +17,11 @@ const HabitsService = {
 
     //create array of dates
     const dates = [
-      moment().tz('America/New_York'),
-      moment().tz('America/New_York').subtract(1,'days'),
-      moment().tz('America/New_York').subtract(2,'days'),
-      moment().tz('America/New_York').subtract(3,'days'),
-      moment().tz('America/New_York').subtract(4,'days'),
+      moment.tz('America/New_York').format(),
+      moment.tz('America/New_York').subtract(1,'days').format(),
+      moment.tz('America/New_York').subtract(2,'days').format(),
+      moment.tz('America/New_York').subtract(3,'days').format(),
+      moment.tz('America/New_York').subtract(4,'days').format(),
     ]
 
     console.log(dates);
