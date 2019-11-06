@@ -13,6 +13,8 @@ const HabitsService = {
 
   addHabitDate(db, newHabitId){
     
+    console.log("+++++++++++++++++++++++++ ", newHabitId);
+
     //create array of dates
     const dates = [
       moment().tz('America/New_York'),
