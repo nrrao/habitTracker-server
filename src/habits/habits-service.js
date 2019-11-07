@@ -4,7 +4,6 @@ const HabitsService = {
   getAllDatesForHabit(db,habitId){
     const past = moment.tz('America/New_York').subtract(4,'days').format('YYYY-MM-DD')
     const now =  moment.tz('America/New_York').format()
-    console.log("Before knex Raw")
     
     return db
     .from('habit_dates')
@@ -47,7 +46,6 @@ const HabitsService = {
            for(let i=0; i<dates.length; i++) {
              dates[i].date_added = moment(dates[i].date_added).tz('America/New_York').format();
            }
-           console.log("%%%%%%%%%%%%%  ", dates);
            return{...habit,dates}
          })
 
