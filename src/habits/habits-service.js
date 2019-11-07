@@ -4,6 +4,7 @@ const HabitsService = {
   getAllDatesForHabit(db,habitId){
     const past = moment.tz('America/New_York').subtract(4,'days').format('YYYY-MM-DD')
     const now =  moment.tz('America/New_York')
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^ ", past, now)
     return db
     .from('habit_dates')
     .select('*')
