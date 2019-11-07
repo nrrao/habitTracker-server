@@ -44,6 +44,7 @@ const HabitsService = {
         return Promise.all(habits.map(habit=>{
           return HabitsService.getAllDatesForHabit(db,habit.habit_id)
          .then(dates=>{
+           console.log("&&&&&&&&&&&&&&&&& ", dates);
            return{...habit,dates}
          })
 
