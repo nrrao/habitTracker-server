@@ -5,12 +5,15 @@ const HabitsService = {
     const past = moment.tz('America/New_York').subtract(4,'days').format('YYYY-MM-DD')
     const now =  moment.tz('America/New_York').format()
     console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^ ", past, now)
-    return db
+    const ret =  db
     .from('habit_dates')
     .select('*')
     .where('habit_dates.habit_id',habitId)
     .whereBetween('date_added',[past,now])
-    .orderBy('date_added','desc')
+    .orderBy('date_added','desc');
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!! ", ret)
+    return ret;
   },
 
   addHabitDate(db, newHabitId){
@@ -44,7 +47,6 @@ const HabitsService = {
         return Promise.all(habits.map(habit=>{
           return HabitsService.getAllDatesForHabit(db,habit.habit_id)
          .then(dates=>{
-           console.log("---------------------- ", dates)
            return{...habit,dates}
          })
 
