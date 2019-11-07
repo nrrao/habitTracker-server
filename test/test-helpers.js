@@ -4,11 +4,11 @@ const moment = require('moment');
 
 getDatesArray = () => {
   const dates = [
-    moment(),
-    moment().subtract(1,'days'),
-    moment().subtract(2,'days'),
-    moment().subtract(3,'days'),
-    moment().subtract(4,'days'),
+    moment.tz('America/New_York'),
+    moment.tz('America/New_York').subtract(1,'days'),
+    moment.tz('America/New_York').subtract(2,'days'),
+    moment.tz('America/New_York').subtract(3,'days'),
+    moment.tz('America/New_York').subtract(4,'days'),
   ];
   return dates;
 }
@@ -126,7 +126,8 @@ function makeExpectedHabitlist(userId, habits, dates) {
         return {
           date_id:hd.date_id,
           percentage:hd.percentage,
-          date_added:hd.date_added.toISOString(),
+          date_added:moment(hd.date_added).tz('America/New_York').format(),
+          //date_added:hd.date_added.toISOString(),
           habit_id:eachHabit.habit_id
         }
       })
