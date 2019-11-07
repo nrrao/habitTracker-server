@@ -5,21 +5,18 @@ const HabitsService = {
     const past = moment.tz('America/New_York').subtract(4,'days').format('YYYY-MM-DD')
     const now =  moment.tz('America/New_York').format()
     console.log("Before knex Raw")
-    return knex.raw("select * from habit_dates where habit_dates.habit_id=? and habit_dates.date_added between ? and ?", habitId, past, now).toSQL()
     
-    // return db
-    // .from('habit_dates')
-    // .select('*')
-    // .where('habit_dates.habit_id',habitId)
-    // .whereBetween('date_added',[past,now])
-    // .orderBy('date_added','desc');
+    return db
+    .from('habit_dates')
+    .select('*')
+    .where('habit_dates.habit_id',habitId)
+    .whereBetween('date_added',[past,now])
+    .orderBy('date_added','desc');
 
   },
 
   addHabitDate(db, newHabitId){
     
-    console.log("+++++++++++++++++++++++++ ", newHabitId);
-
     //create array of dates
     const dates = [
       moment.tz('America/New_York').format(),
