@@ -91,7 +91,7 @@ const HabitsService = {
   },
 
   async addDateId(db,habitId,dates,habit_title,userId){
-    
+    console.log('+++++++',dates)
     dates.map(date=>{
       return db('habit_dates')
       .insert({percentage:date.percentage,date_added:date.date_added,habit_id:habitId})
