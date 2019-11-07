@@ -4,16 +4,16 @@ const HabitsService = {
   getAllDatesForHabit(db,habitId){
     const past = moment.tz('America/New_York').subtract(4,'days').format('YYYY-MM-DD')
     const now =  moment.tz('America/New_York').format()
-    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^ ", past, now)
-    const ret =  db
-    .from('habit_dates')
-    .select('*')
-    .where('habit_dates.habit_id',habitId)
-    .whereBetween('date_added',[past,now])
-    .orderBy('date_added','desc');
+    console.log("Before knex Raw")
+    return knex.raw("select * from habit_dates where habit_dates.habit_id=? and habit_dates.date_added between ? and ?", habitId, past, now).toSQL()
+    
+    // return db
+    // .from('habit_dates')
+    // .select('*')
+    // .where('habit_dates.habit_id',habitId)
+    // .whereBetween('date_added',[past,now])
+    // .orderBy('date_added','desc');
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!! ", ret)
-    return ret;
   },
 
   addHabitDate(db, newHabitId){
