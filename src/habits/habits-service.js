@@ -44,7 +44,10 @@ const HabitsService = {
         return Promise.all(habits.map(habit=>{
           return HabitsService.getAllDatesForHabit(db,habit.habit_id)
          .then(dates=>{
-           console.log("%%%%%%%%%%%%%  ", moment(dates[0].date_added).tz('America/New_York').format());
+           for(let i=0; i<dates.length; i++) {
+             dates[i].date_added = moment(dates[i].date_added).tz('America/New_York').format();
+           }
+           console.log("%%%%%%%%%%%%%  ", dates);
            return{...habit,dates}
          })
 
