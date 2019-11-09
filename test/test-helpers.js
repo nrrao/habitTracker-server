@@ -180,24 +180,6 @@ function seedUsers(db, users) {
     )
 }
 
-// function seedHabitsTables(db, users, habits, habitDates=[]) {
-//   // use a transaction to group the queries and auto rollback on any failure
-//   return db.transaction(async trx => {
-//     await seedUsers(trx, users)
-//     await trx.into('habits').insert(habits)
-//     // update the auto sequence to match the forced id values
-//     await trx.raw(
-//       `SELECT setval('habits_habit_id', ?)`,
-//       [habits[habits.length - 1].habit_id],
-//     )
-//       await trx.into('habit_dates').insert(habitDates)
-//       await trx.raw(
-//         `SELECT setval('habit_dates_date_id', ?)`,
-//         habiDates[habitDates.length - 1].date_id],
-//       )
-    
-//   })
-// }
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
   const token = jwt.sign({ user_id: user.id }, secret, {
