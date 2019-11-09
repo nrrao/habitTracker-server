@@ -39,7 +39,7 @@ habitsRouter
   })
 
   .patch(requireAuth,jsonBodyParser, (req, res, next) => {
-    
+    console.log('++++++',req.body)
     const {habit_id,habit_title,dates}=req.body;
     const habitToUpdate= {habit_id,habit_title,dates};
    
