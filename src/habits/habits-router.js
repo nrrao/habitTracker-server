@@ -51,6 +51,8 @@ habitsRouter
         }
       });
     const datesToAdd = habitToUpdate.dates.filter(date =>{return date.date_id === -1;});
+
+    const datesToUdate = habitToUpdate.dates.filter(date =>{return date.date_id > -1;});
     
     if(datesToAdd.length !== 0){
       HabitsService.addDateId(req.app.get('db'),habitToUpdate.habit_id,datesToAdd,habitToUpdate.habit_title,req.user.id)
@@ -61,8 +63,9 @@ habitsRouter
         })
         .catch(next);
     }
-    else{
-      HabitsService.updateHabit(req.app.get('db'),habitToUpdate.habit_id,habitToUpdate.habit_title,habitToUpdate.dates,req.user.id)
+
+    if(datesToUdate.length !== 0) {
+      HabitsService.updateHabit(req.app.get('db'),habitToUpdate.habit_id,habitToUpdate.habit_title,datesToUdate,req.user.id)
         .then(habitsAfterUpdate=>{
           res.status(201)
           
