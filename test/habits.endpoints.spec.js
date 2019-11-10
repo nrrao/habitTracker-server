@@ -1,6 +1,7 @@
 const knex = require('knex');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
+const moment = require('moment-timezone');
 
 describe('Habits Endpoints', function() {
   let db;
@@ -37,10 +38,6 @@ describe('Habits Endpoints', function() {
     });
 
     context('Given habits in the database', () => {
-      // const preppedUsers = users.map(user => ({
-      //   ...user,
-      //   password: bcrypt.hashSync(user.password, 1)
-      // }))
       beforeEach(() =>
         db.into('habits_users').insert(testUsers)
           .then(()=>{
@@ -152,27 +149,38 @@ describe('Habits Endpoints', function() {
         const userId=testUsers[0].id;
         const expectedHabitList=helpers.makeExpectedHabitlist(userId,testHabits,testDates);
         const updateHabit = {
-          habit_id:5,
+          habit_id:1,
           habit_title:'updated habit title',
-          dates:[]
+          dates:[    {
+            date_id:1,
+            percentage:80,
+            date_added: moment.tz('America/New_York').format(),
+          },
+          {
+            date_id:5,
+            percentage:80,
+            date_added: moment.tz('America/New_York').subtract(4,'days').format(),
+            
+          },]
         };
+
         const expectedHabit = expectedHabitList.map(hl=>
           hl.habit_id===updateHabit.habit_id
-          ?{...hl,habit_title:updateHabit.habit_title,dates:updateHabit.dates}
+          ?{...hl,habit_title:updateHabit.habit_title}
           :hl
           )
 
-        return supertest(app)
+           return supertest(app)
           .patch('/api/habits')
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .send(updateHabit)
           .expect(201)
           .then(res =>
             supertest(app)
-              .get(`/api/habits`)
+              .get('/api/habits')
               .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
               .expect(expectedHabit)
-        )
+          );
       });
 
     });

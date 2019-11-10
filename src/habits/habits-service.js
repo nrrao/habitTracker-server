@@ -1,4 +1,4 @@
-var moment = require('moment-timezone');
+const moment = require('moment-timezone');
 
 const HabitsService = {
   getAllDatesForHabit(db,habitId){
