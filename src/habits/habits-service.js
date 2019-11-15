@@ -25,7 +25,7 @@ const HabitsService = {
       moment.tz('America/New_York').subtract(4,'days').format(),
     ]
 
-    console.log(dates);
+    
     const datesToInsert = dates.map(date=>
       ({'percentage': 0, 'date_added':date, 'habit_id':newHabitId}))
     
@@ -91,7 +91,7 @@ const HabitsService = {
   },
 
   async addDateId(db,habitId,dates,habit_title,userId){
-    console.log('+++++++',dates)
+    
     dates.map(date=>{
       return db('habit_dates')
       .insert({percentage:date.percentage,date_added:date.date_added,habit_id:habitId})
