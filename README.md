@@ -23,7 +23,7 @@ DELETE/api/habits/:habitId - Delete the habit.
 
 ### Why HabitTracker?
 "What gets measured gets managed"
-Build positvie habits or easily break bad habits by keeping track.
+Build positive habits or easily break bad habits by keeping track.
 HabitTracker allows you to keep track of your habits every day and helps you achieve your goals.
 
 ### Technologies Used
