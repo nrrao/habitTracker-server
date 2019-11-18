@@ -42,13 +42,17 @@ HabitTracker allows you to keep track of your habits every day and helps you ach
 ## Landing
 ![landing](https://user-images.githubusercontent.com/25930687/69060656-b827d380-09e5-11ea-871a-e13469ff0833.PNG)
 ## Log In
-![Login](https://user-images.githubusercontent.com/25930687/67593170-8ea1c200-f72f-11e9-8471-7c73c556be73.png)
+![login](https://user-images.githubusercontent.com/25930687/69060786-f7562480-09e5-11ea-9353-ee22fa59643b.PNG)
 ## Sign Up
-![signup](https://user-images.githubusercontent.com/25930687/67593208-a9743680-f72f-11e9-9a8b-404123370558.png)
+![signup](https://user-images.githubusercontent.com/25930687/69060805-ff15c900-09e5-11ea-82da-55b98723f747.PNG)
 ## Hasbit List
-![Habitlist](https://user-images.githubusercontent.com/25930687/67593522-4e8f0f00-f730-11e9-8c49-d68e160fdd6a.png)
+![habitlist](https://user-images.githubusercontent.com/25930687/69060815-03da7d00-09e6-11ea-9484-bedfa5259152.PNG)
 ## Add New Habit
-![AddHabit](https://user-images.githubusercontent.com/25930687/67593251-c7da3200-f72f-11e9-8dc9-c0142195bdb8.png)
+![addnewhabit](https://user-images.githubusercontent.com/25930687/69060827-0b018b00-09e6-11ea-9136-82738a40f6b4.PNG)
 ## Edit Mode
-![Editmode](https://user-images.githubusercontent.com/25930687/67593287-de808900-f72f-11e9-9854-0855185eed97.png)
+![editmode](https://user-images.githubusercontent.com/25930687/69060821-08069a80-09e6-11ea-9808-41cc32c80aa1.PNG)
+
+
+
+
 
