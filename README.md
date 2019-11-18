@@ -44,7 +44,7 @@ HabitTracker allows you to keep track of your habits every day and helps you ach
 ## Log In
 ![login](https://user-images.githubusercontent.com/25930687/69060786-f7562480-09e5-11ea-9353-ee22fa59643b.PNG)
 ## Sign Up
-![signup](https://user-images.githubusercontent.com/25930687/69060805-ff15c900-09e5-11ea-82da-55b98723f747.PNG)
+![signup](https://user-images.githubusercontent.com/25930687/69061271-d17d4f80-09e6-11ea-9eed-2f5adb20e979.PNG)
 ## Hasbit List
 ![habitlist](https://user-images.githubusercontent.com/25930687/69060815-03da7d00-09e6-11ea-9484-bedfa5259152.PNG)
 ## Add New Habit
